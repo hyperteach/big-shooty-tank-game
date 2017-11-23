@@ -9,13 +9,13 @@ public class CarMovement : MonoBehaviour {
 
 	public float power;
 	public float friction;
-	public Vector3 velocity;
 
-	public float orientation;
 	public float steerPower;
-	public float angularVelocity;
 	public float angularFriction;
 
+	Vector3 velocity;
+	float orientation;
+	float angularVelocity;
 
 
 
