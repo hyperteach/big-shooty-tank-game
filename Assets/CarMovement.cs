@@ -7,11 +7,11 @@ public class CarMovement : MonoBehaviour {
 	public iInputDevice device;
 
 
-	public float power;
-	public float friction;
+	public float power=20;
+	public float friction=2;
 
-	public float steerPower;
-	public float angularFriction;
+	public float steerPower=500;
+	public float angularFriction=2;
 
 	Vector3 velocity;
 	float orientation;
