@@ -37,17 +37,25 @@ public class BotPlayer : MonoBehaviour {
 	public float wanderDirectionChangeTime = 3;
 	float wanderTargetAngle = 0;
 	float wanderNextTarget = 0;
+	public float wanderSteerPower = 0.4f;
 	void Wander(){
 		wanderNextTarget -= Time.deltaTime;
 		if (wanderNextTarget <= 0) {
 			wanderNextTarget += wanderDirectionChangeTime;
 			wanderTargetAngle = Random.value * Mathf.PI * 2;
+			Debug.Log ("New direction: " + wanderTargetAngle);
 		}
+
+		float currentAngle = Mathf.Atan2 (transform.forward.z, transform.forward.x);
+		float rotation = wanderTargetAngle - currentAngle;
+
+		// Tricks!
+		rotation = ((rotation + Mathf.PI) % (Mathf.PI*2)) - Mathf.PI;
 
 		aim = 0;
 		fire = false;
 		accelerate = 0.75f;
-		steer = Mathf.Sin (Time.time);
+		steer = Mathf.Clamp (rotation*wanderSteerPower, -1, 1);
 	}
 
 	public float GetSteering(){
