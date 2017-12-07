@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CarType {
+	HUMAN,
+	ROBOT
+}
+
 public class CarMovement : MonoBehaviour {
 
+	public CarType type;
 	public iInputDevice device;
-
 
 	public float power=20;
 	public float friction=2;
@@ -17,10 +22,15 @@ public class CarMovement : MonoBehaviour {
 	float orientation;
 	float angularVelocity;
 
-
-
 	void Start (){
-		device = new KeyboardDevice (); // TODO: Assign a device based on settings
+		switch (type) {
+		case CarType.HUMAN:
+			device = new KeyboardDevice (); // TODO: Assign a device based on settings
+			break;
+		case CarType.ROBOT:
+			device = new KeyboardDevice (); // TODO: Write an AIDevice
+			break;
+		}
 	}
 
 	// Update is called once per frame
