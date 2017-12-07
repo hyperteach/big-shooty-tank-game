@@ -28,7 +28,7 @@ public class CarMovement : MonoBehaviour {
 			device = new KeyboardDevice (); // TODO: Assign a device based on settings
 			break;
 		case CarType.ROBOT:
-			device = new KeyboardDevice (); // TODO: Write an AIDevice
+			device = new AutoDevice (this.gameObject); // TODO: Write an AIDevice
 			break;
 		}
 	}

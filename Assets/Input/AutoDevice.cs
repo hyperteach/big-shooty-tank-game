@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class AutoDevice : iInputDevice {
 
+	BotPlayer bot;
+
+	public AutoDevice(GameObject myself){
+		bot = myself.GetComponent<BotPlayer> ();
+		if (bot == null) {
+			bot = myself.AddComponent<BotPlayer> ();
+		}
+	}
+
 	float iInputDevice.GetSteering(){
-		return 0;
+		return bot.GetSteering();
 	}
 	float iInputDevice.GetAcceleration(){
-		return 0;
+		return bot.GetAcceleration();
 	}
 	float iInputDevice.GetAiming(){
-		return 0;
+		return bot.GetAiming();
 	}
 	bool iInputDevice.GetFire(){
-		return false;
+		return bot.GetFire();
 	}
 
 }
