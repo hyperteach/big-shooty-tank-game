@@ -27,6 +27,10 @@ public class BotPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Decide AI state
+
+
+		// Do AI
 		switch (state) {
 		case AIState.WANDERING:
 			Wander ();
