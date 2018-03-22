@@ -11,8 +11,12 @@ public struct Team {
 	public Vector3 goals;
 }
 
+public delegate void BallGameEvent(Team team);
+
 public class BallGame : MonoBehaviour {
 
+	public static event BallGameEvent TeamScored;
+	public static event BallGameEvent BallPickedUp;
 
 	List<RugbyAgent> _agents;
 	public List<RugbyAgent> agents{
@@ -24,9 +28,6 @@ public class BallGame : MonoBehaviour {
 		}
 	}
 
-	public Text text;
-	public float textTime = 3;
-	float textcool = 0;
 
 	static BallGame _instance;
 	public static BallGame instance {
@@ -58,10 +59,6 @@ public class BallGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		textcool -= Time.deltaTime;
-		if (textcool<=0){
-			text.text = "";
-		}
 
 		cool -= Time.deltaTime;
 		if (cool<=0){
@@ -141,9 +138,14 @@ public class BallGame : MonoBehaviour {
 	}
 
 	public void Score(RugbyAgent ra){
-		text.color = teams[ra.teamNumber].color;
-		text.text = teams[ra.teamNumber].name + " a marqué!";
-		textcool = textTime;
+		if (TeamScored!=null){
+			TeamScored(teams[ra.teamNumber]);
+		}
+	}
+	public void BallPickup(RugbyAgent ra){
+		if (BallPickedUp!=null){
+			BallPickedUp(teams[ra.teamNumber]);
+		}
 	}
 
 }
